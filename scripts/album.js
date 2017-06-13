@@ -29,7 +29,21 @@ var albumMarconi = {
          { title: 'Wrong phone number', duration: '2:15'}
      ]
  };
-
+//Third Album
+var albumThird = {
+    title: '123',
+     artist: 'The Third Guy',
+     label: 'Tre',
+     year: '2017',
+     albumArtUrl: 'assets/images/album_covers/15.png',
+     songs: [
+         { title: 'Good Song', duration: '1:01' },
+         { title: 'Bad Song', duration: '5:01' },
+         { title: 'This is OK', duration: '3:21'},
+         { title: 'Why Bother?', duration: '3:14' },
+         { title: 'Better Luck Next Time', duration: '2:15'}
+     ]
+ };
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -41,15 +55,14 @@ var albumMarconi = {
  
      return template;
  };
-
-
- var setCurrentAlbum = function(album) {
-     // #1
+    // Set Current Album
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+ var setCurrentAlbum = function(album) {
  
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -68,4 +81,15 @@ var albumMarconi = {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     var albums = [albumPicasso, albumMarconi, albumThird];
+     var index=1;
+     albumImage.addEventListener("click", function(event) {
+         setCurrentAlbum(albums[index]);
+         index++;
+         if (index == albums.length) {
+             index = 0;
+         }
+        
+     });
  };
