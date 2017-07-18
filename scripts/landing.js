@@ -11,10 +11,6 @@ var animatePoints = function() {
 $.each($('.point'), revealPoint);
 };
 
-var animatePoints = function (points) {
-   forEach(points, revealPoint);
-};
-
 $(window).load(function() {
     //#1
      if ($(window).height() > 950) {
