@@ -61,7 +61,7 @@ var createSongRow = function(songNumber, songName, songLength) {
           } else {
                $(this).html(playButtonTemplate);               $('.main-controls .play-pause').html(playerBarPlayButton);
                currentSoundFile.pause();   
-	}
+	   }
     }
 };  
     
@@ -117,8 +117,8 @@ var createSongRow = function(songNumber, songName, songLength) {
      }
  };
 
- var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
- var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 var playerBarPlayButton = '<span class="ion-play"></span>';
 var playerBarPauseButton = '<span class="ion-pause"></span>';
 
@@ -131,6 +131,7 @@ var currentVolume = 80;
 
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
+var $playPauseButton = $('.main-controls .play-pause');
 
 
  var trackIndex = function(album, song) {
@@ -166,6 +167,8 @@ var nextSong = function() {
     // Update the Player Bar information
     updatePlayerBarSong();
 
+    $('.main-controls .play-pause').html(playerBarPauseButton);
+    
     var $nextSongNumberCell = getSongNumberCell(setSong);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
 
@@ -201,6 +204,19 @@ var previousSong = function() {
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
 };
+
+var togglePlayFromPlayerBar = function() {
+    var $currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+    if (currentSoundFile.isPaused()) {
+        $currentlyPlayingCell.html(pauseButtonTemplate);
+        $(this).html(playerBarPauseButton);
+        currentSoundFile.play();
+    } else if (currentSoundFile) {
+        $currentlyPlayingCell.html(playButtonTemplate);
+        $(this).html(playerBarPlayButton);
+        currentSoundFile.pause();
+    };
+}
 
  $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
